@@ -11,7 +11,7 @@ const About = () => {
       </div>
       <div className='my-10 flex flex-col md:flex-row gap-1'>
         <img className='w-full md:max-w-[450px]' src={assets.about_img} alt="" />
-        <div className='flex flex-col justify-center gap-6 md:w-2/4 text-gray-600'>
+        <div className='flex flex-col justify-center gap-6 md:w-2/4 text-gray-200'>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
           <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
           <b className='text-gray-800'>Our Mission</b>
@@ -35,7 +35,7 @@ const About = () => {
           <p className='text-gray-600'>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
       </div>
-      <NewsLetterBox/>
+      {/* <NewsLetterBox/>*/}
     </div>
   )
 }

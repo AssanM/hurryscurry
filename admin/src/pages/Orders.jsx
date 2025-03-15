@@ -9,7 +9,7 @@ import { assets } from '../assets/assets'
 const Orders = ({token}) => {
 
   const [orders, setOrders] = useState([])
-
+  
   const fetchAllOrders = async ()=>{
     if (!token)
     {

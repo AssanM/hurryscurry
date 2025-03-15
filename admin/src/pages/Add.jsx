@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {assets} from '../assets/assets'
 import { useState } from 'react'
 import axios from 'axios'
 import {backendUrl} from '../App'
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify'  
 
 const Add = ({token}) => {
 
@@ -19,20 +19,26 @@ const Add = ({token}) => {
   const [subCategory, setSubCategory] = useState("Topwear")
   const [bestseller,setBestseller] = useState(false);
   const [sizes, setSizes] = useState([])
+  const [game, setGame] = useState('Genshin Impact');
+  const [region, setRegion] = useState('Europe');
+  const [categoryFilter, setCategoryFilter] = useState('Ивентовые и легендарные');
+  const [categories, setCategories] = useState([]);
 
   const onSubmitHandler = async (e) =>{
     e.preventDefault();
     try {
-      
       const formData = new FormData()
 
       formData.append("name", name)
       formData.append("description", description)
       formData.append("price", price)
-      formData.append("category", category)
-      formData.append("subCategory", subCategory)
+      //formData.append("category", category)
+      //formData.append("subCategory", subCategory)
       formData.append("bestseller", bestseller)
-      formData.append("sizes", JSON.stringify(sizes))
+      //formData.append("sizes", JSON.stringify(sizes))
+      formData.append("game", game);
+      formData.append("categoryFilter", categoryFilter);
+      formData.append("region", region);
 
       image1 && formData.append("image1", image1)
       image2 && formData.append("image2", image2)
@@ -60,6 +66,31 @@ const Add = ({token}) => {
       toast.error(error.message)
     }
   }
+
+  const fetchList = async()=>{
+    try {
+        if (!token)
+        {
+            return null;
+        }
+        const response = await axios.post(backendUrl+'/api/category/list',{},{headers:{token}})
+        
+        if(response.data.success)
+        {          
+            setCategories(response.data.categories);
+        }
+        else{
+            toast.error(response.data.message);
+        }
+    } catch (error) {
+            toast.error(error.message);
+    }
+}
+
+
+  useEffect(()=>{
+          fetchList()
+      },[token])
 
 
   return (
@@ -92,32 +123,71 @@ const Add = ({token}) => {
       </div>
       <div className='w-full'>
         <p className='mb-2'>Product description</p>
-        <textarea onChange={(e)=>setDescription(e.target.value)} value={description} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Write content here' reguired />
+        <textarea onChange={(e)=>setDescription(e.target.value)} value={description} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Write content here' required />
       </div>
       <div className='flex flex-col sm:flex-row gap-2 w-full sm:gap-8'>
         <div >
-          <p className='mb-2'>Product category</p>
-          <select onChange={(e)=>setCategory(e.target.value)} className='w-full px-3 py-2'>
-            <option value="Men">Men</option>
+          <p className='mb-2'>Game</p>
+          <select onChange={(e)=>setGame(e.target.value)} className='w-full px-3 py-2'>
+            {/* <option value="Men">Men</option>
             <option value="Women">Women</option>
             <option value="Kids">Kids</option>
+            */}
+            {
+              categories.map((item, index)=>{
+                if (item.type == "game") {
+                  return (                  
+                    <option value={item.name} key={index}>{item.name}</option>                  
+                  )  
+                }           
+              })
+            }
           </select>
         </div>
         <div>
-          <p className='mb-2'>Product subCategory</p>
-          <select onChange={(e)=>setSubCategory(e.target.value)} className='w-full px-3 py-2'>
-            <option value="Topwear">Topwear</option>
+          <p className='mb-2'>Category</p>
+          <select onChange={(e)=>setCategoryFilter(e.target.value)} className='w-full px-3 py-2'>
+            {/* <option value="Topwear">Topwear</option>
             <option value="Bottomear">Bottomear</option>
             <option value="Winterwear">Winterwear</option>
+            */}
+            {
+              categories.map((item, index)=>{
+                if (item.type == "category") {
+                  return (                  
+                    <option value={item.name} key={index}>{item.name}</option>                  
+                  )  
+                }           
+              })
+            }
           </select>
         </div>
+        <div>
+          <p className='mb-2'>Region</p>
+          <select onChange={(e)=>setRegion(e.target.value)} className='w-full px-3 py-2'>
+            {/* <option value="Topwear">Topwear</option>
+            <option value="Bottomear">Bottomear</option>
+            <option value="Winterwear">Winterwear</option>
+            */}
+            {
+              categories.map((item, index)=>{
+                if (item.type == "region") {
+                  return (                  
+                    <option value={item.name} key={index}>{item.name}</option>                  
+                  )  
+                }           
+              })
+            }
+          </select>
+        </div>
+
 
         <div>
           <p className='mb-2'>Product price</p>
           <input onChange={(e)=>setPrice(e.target.value)} value={price} className='w-full px-3 py-2 sm:w-[120px]' type="Number" placeholder='25' />
         </div>
       </div>
-
+      {/* 
       <div>
         <p className='mb-2'> Product Sizes</p>
         <div className='flex gap-3'>
@@ -141,7 +211,7 @@ const Add = ({token}) => {
             <p className={`${sizes.includes("XXL") ? 'bg-pink-100':'bg-slate-200'} px-3 py-1 cursor-pointer`}>XXL</p>
           </div>
         </div>
-      </div>
+      </div>*/}
       <div className='flex gap-2 mt-2'>
         <input onChange={()=>setBestseller(prev=>!prev)} checked={bestseller} type="checkbox" id='bestseller' />
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>

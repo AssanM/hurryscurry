@@ -73,8 +73,18 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
+import bg_img from './bg3.jpg'
+import promotion from './promotion.png'
+import nmhFP9x from './nmhFP9x.png'
+import sidbTIr from './sidbTIr.png'
+import tif4hqf from './tif4hqf.png'
+import V5g57Yu from './V5g57Yu.png'
 
 export const assets = {
+    V5g57Yu,
+    tif4hqf,
+    sidbTIr,
+    nmhFP9x,
     logo,
     hero_img,
     cart_icon,
@@ -92,7 +102,9 @@ export const assets = {
     contact_img,
     razorpay_logo,
     stripe_logo,
-    cross_icon
+    cross_icon,
+    bg_img,
+    promotion
 }
 
 export const products = [

@@ -126,14 +126,14 @@ const PlaceOrder = () => {
       {/* Left Side */}
       <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
         <div className='text-xl sm:text-2xl my-3'>
-          <Title text1={'DELIVERY'} text2={'INFORMATION'}></Title>
+          <Title text1={'ИНФОРМАЦИЯ'} text2={'ПОКУПАТЕЛЯ'}></Title>
         </div>
-        <div className='flex gap-3'>
+        {/* <div className='flex gap-3'>
           <input required onChange={onChangeHandler} name='firstname' value={formData.firstname} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='First name'/>
           <input required onChange={onChangeHandler} name='lastname' value={formData.lastname} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='Last name'/>
-        </div>
+        </div>*/}
         <input required onChange={onChangeHandler} name='email' value={formData.email} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="email" placeholder='Email address'/>
-        <input required onChange={onChangeHandler} name='street' value={formData.street} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='Street'/>
+        {/* <input required onChange={onChangeHandler} name='street' value={formData.street} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='Street'/>
         <div className='flex gap-3'>
           <input required onChange={onChangeHandler} name='city' value={formData.city} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='City'/>
           <input required onChange={onChangeHandler} name='state' value={formData.state} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='State'/>
@@ -143,6 +143,7 @@ const PlaceOrder = () => {
           <input required onChange={onChangeHandler} name='country' value={formData.country} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="text" placeholder='Country'/>
         </div>
         <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 rounded oy-1.5 px-3.5 w-full' type="number" placeholder='Phone'/>
+        */}
       </div>
 
       {/* Right Side */}

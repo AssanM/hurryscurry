@@ -8,11 +8,11 @@ import NewsLetterBox from '../components/NewsLetterBox'
 const Home = () => {
   return (
     <div>
-      <Hero/>
+      <Hero />
       <LatestCollection/>
       <BestSeller/>
-      <OurPolicy/>
-      <NewsLetterBox/>
+      {/* <OurPolicy/>*/}
+      {/* <NewsLetterBox/>*/}
     </div>
   )
 }

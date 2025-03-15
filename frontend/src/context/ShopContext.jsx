@@ -14,42 +14,52 @@ const ShopContextProvider = (props) =>
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
+    const [promotions, setPromotions] = useState([]);
     const [token, setToken] = useState('');
     const navigate = useNavigate();
-
+    const [categories, setCategories] = useState([]);
 
     const addToCart = async (itemId, size)=>{
-        if (!size) {
-            toast.error('Select Product Size');
-            return;
-        }
-        let cartData = structuredClone(cartItems);
+        try {
+            
+            if (!size) {
+                size='M'
+             }
+             console.log(itemId);
+            console.log(size);
+             let cartData = structuredClone(cartItems);
+             console.log(cartData);
+             
+             if (cartData[itemId]) {
+                 if (cartData[itemId][size]) {
+                     //cartData[itemId][size] +=1;
+                 }
+                 else
+                 {
+                     cartData[itemId][size] = 1;
+                 }            
+             }
+             else{
+                 cartData[itemId] = {};
+                 cartData[itemId][size] = 1;
+             }
+             setCartItems(cartData);
+             console.log(token);
+             
+             if (token) {
+                 try {                     
+                     await axios.post(backendUrl+'/api/cart/add',{itemId, size},{headers:{token}})
+                 } catch (error) {
+                     console.log(error);
+                     toast(error.message);                
+                 }
+             }
+        } catch (error) {
+            console.log(error);
 
-        if (cartData[itemId]) {
-            if (cartData[itemId][size]) {
-                cartData[itemId][size] +=1;
-            }
-            else
-            {
-                cartData[itemId][size] = 1;
-            }            
+            
         }
-        else{
-            cartData[itemId] = {};
-            cartData[itemId][size] = 1;
-        }
-        setCartItems(cartData);
         
-        if (token) {
-            try {
-                console.log(backendUrl);
-                
-                await axios.post(backendUrl+'/api/cart/add',{itemId, size},{headers:{token}})
-            } catch (error) {
-                console.log(error);
-                toast(error.message);                
-            }
-        }
     }
 
     const getCartCount = ()=>{
@@ -130,8 +140,40 @@ const ShopContextProvider = (props) =>
         }
     }
 
+    const getActivePromotions = async ()=>{
+        try {
+            const response = await axios.get(backendUrl+"/api/promotion/active");            
+            if(response.data.success)
+            {
+                let activePromotions =  response.data.promotions.find((promotion)=> promotion.active === true);
+                setPromotions(response.data.promotions)
+            }else{
+                toast.error(response.data.message)
+            }    
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    const getCategories = async()=>{
+        try {
+            const response = await axios.post(backendUrl+'/api/category/list',{},{headers:{token}})            
+            if(response.data.success)
+            {                
+                setCategories(response.data.categories)
+            }else{
+                toast.error(response.data.message)
+            }
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     useEffect(()=>{
         getProductsData();
+        getActivePromotions();
+        getCategories();
     },[])
 
     useEffect(()=>{
@@ -148,7 +190,8 @@ const ShopContextProvider = (props) =>
         cartItems, addToCart,setCartItems,
         getCartCount,updateQuantity,
         getCartAmount,navigate,
-        backendUrl,token,setToken
+        backendUrl,token,setToken,
+        promotions,categories
     }
 
     return (

@@ -7,13 +7,18 @@ import { useResolvedPath } from 'react-router-dom';
 
 const Collection = () => {
 
-  const {products, search, showSearch} = useContext(ShopContext);
+  const {products, search, showSearch, categories} = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
-
+  const [game,setGame] = useState([])
+  const [categoryList,setCategoryList] = useState([])
+  const [region,setRegion] = useState([])
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavant');
+  const [gameFilter, setGameFilter] = useState([]);
+  const [regionFilter, setRegionFilter] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState([]);
 
   const toggleCategory = (e)=>{
     if (category.includes(e.target.value))
@@ -24,6 +29,38 @@ const Collection = () => {
       setCategory(prev => [...prev, e.target.value])
     }
   }
+
+  const toggleGame = (e)=>{    
+    if (gameFilter.includes(e.target.value))
+    {
+      setGameFilter(prev=> prev.filter(item=> item != e.target.value))
+    }
+    else{
+      setGameFilter(prev => [...prev, e.target.value])
+    }
+  }
+
+  const toggleRegion = (e)=>{
+    if (regionFilter.includes(e.target.value))
+    {
+      setRegionFilter(prev=> prev.filter(item=> item != e.target.value))
+    }
+    else{
+      setRegionFilter(prev => [...prev, e.target.value])
+    }
+  }
+
+  
+  const toggleCategoryFilter = (e)=>{
+    if (categoryFilter.includes(e.target.value))
+    {
+      setCategoryFilter(prev=> prev.filter(item=> item != e.target.value))
+    }
+    else{
+      setCategoryFilter(prev => [...prev, e.target.value])
+    }
+  }
+
   const toggleSubCategory =(e)=>{
     if (subCategory.includes(e.target.value))
       {
@@ -36,16 +73,18 @@ const Collection = () => {
 
   const applyFilter =()=>{
     let productsCopy = products.slice();
-
     if (showSearch && search) {
       productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
     }
-
-    if (category.length>0) {
-      productsCopy = productsCopy.filter(item => category.includes(item.category));
+    
+    if (gameFilter.length>0) {
+      productsCopy = productsCopy.filter(item => gameFilter.includes(item.game));
     }
-    if (subCategory.length>0) {
-      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
+    if (categoryFilter.length>0) {
+      productsCopy = productsCopy.filter(item => categoryFilter.includes(item.categoryFilter));
+    }
+    if (regionFilter.length>0) {
+      productsCopy = productsCopy.filter(item => regionFilter.includes(item.region));
     }
     setFilterProducts(productsCopy)
   }
@@ -67,13 +106,21 @@ const Collection = () => {
     }
   }
 
+  const getFilterData = ()=>{
+    setGame(categories.filter(item => item.type === "game"))
+    setCategoryList(categories.filter(item => item.type === "category"))
+    setRegion(categories.filter(item => item.type === "region"))
+    
+  }
+
   /*useEffect(()=>{
     setFilterProducts(products)
   },[])*/
 
   useEffect(()=>{
       applyFilter();
-  },[category, subCategory, search, showSearch,products])
+      getFilterData();
+  },[gameFilter, regionFilter, categoryFilter, search, showSearch,products])
 
   useEffect(()=>{
     sortProduct();
@@ -86,11 +133,11 @@ const Collection = () => {
       <div className='min-w-60'>
         <p  onClick={()=>setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS</p>
          <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter?'rotate-90':''}`} alt="" />
-        {/* Category Filter */}
+        {/* Game Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'> CATGORIES</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
+          <p className='mb-3 text-sm font-medium'> GAME</p>
+          <div className='flex flex-col gap-2 text-sm font-light text-gray-200'>
+            {/*<p className='flex gap-2'>
               <input type="checkbox" className='w-3' value={'Men'} onChange={toggleCategory}/>MEN
             </p>
             <p className='flex gap-2'>
@@ -98,14 +145,22 @@ const Collection = () => {
             </p>
             <p className='flex gap-2'>
               <input type="checkbox" className='w-3' value={'Kids'} onChange={toggleCategory}/>KIDS
-            </p>
+            </p>*/}
+            {
+              game.map((item, index)=>{
+                return (<p className='flex gap-2' key={index}>
+                  <input type="checkbox" className='w-3' value={item.name} onChange={toggleGame}/>{item.name}
+                </p>)
+              }
+              )
+            }
           </div>
         </div>
-        {/* SubCategory Filter */}
+        {/* Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-5 ${showFilter? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'> TYPE</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
+          <p className='mb-3 text-sm font-medium'> CATEGORY</p>
+          <div className='flex flex-col gap-2 text-sm font-light text-gray-200'>
+            {/* <p className='flex gap-2'>
               <input type="checkbox" className='w-3' value={'Topwear'} onChange={toggleSubCategory}/>Topwear
             </p>
             <p className='flex gap-2'>
@@ -113,7 +168,38 @@ const Collection = () => {
             </p>
             <p className='flex gap-2'>
               <input type="checkbox" className='w-3' value={'Winterwear'} onChange={toggleSubCategory}/>Winterwear
+            </p>*/}
+            {
+              categoryList.map((item, index)=>{
+                return (<p className='flex gap-2' key={index}>
+                  <input type="checkbox" className='w-3' value={item.name} onChange={toggleCategoryFilter}/>{item.name}
+                </p>)
+              }
+              )
+            }
+          </div>
+        </div>
+        {/* Region Filter */}
+        <div className={`border border-gray-300 pl-5 py-3 mt-5 ${showFilter? '' : 'hidden'} sm:block`}>
+          <p className='mb-3 text-sm font-medium'> REGION</p>
+          <div className='flex flex-col gap-2 text-sm font-light text-gray-200'>
+            {/* <p className='flex gap-2'>
+              <input type="checkbox" className='w-3' value={'Topwear'} onChange={toggleSubCategory}/>Topwear
             </p>
+            <p className='flex gap-2'>
+              <input type="checkbox" className='w-3' value={'Bottomwear'} onChange={toggleSubCategory}/>Bottomwear
+            </p>
+            <p className='flex gap-2'>
+              <input type="checkbox" className='w-3' value={'Winterwear'} onChange={toggleSubCategory}/>Winterwear
+            </p>*/}
+            {
+              region.map((item, index)=>{
+                return (<p className='flex gap-2' key={index}>
+                  <input type="checkbox" className='w-3' value={item.name} onChange={toggleRegion}/>{item.name}
+                </p>)
+              }
+              )
+            }
           </div>
         </div>
       </div>
