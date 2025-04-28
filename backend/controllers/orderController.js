@@ -2,7 +2,7 @@ import orderModel from '../models/orderModel.js'
 import userModel from '../models/userModel.js';
 import Stripe from 'stripe'
 import razorpay from 'razorpay'
-
+import productDataModel from '../models/productDataModel.js'
 // global variables
 const currency = 'inr'
 const deliveryCharge = 10
@@ -209,4 +209,33 @@ const updateStatus = async (req, res)=>{
     }
 }
 
-export {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe,verifyRazorpay}
+const sendDataToClient = async (req, res)=>{
+    try{
+        const {orderId} = req.body;
+        const order  =await orderModel.findById(orderId);
+        const products = order.items;
+        var infos = "";
+        infos = "Customer Email:"+order.address.email;
+        const productData = await productDataModel.find({});
+        products.map(async (product)=>
+        {
+            const info =productData.find((data) => {return data.productId == product._id});
+            if (info !=null)
+            {
+                infos = infos+" Product Id :"+ product._id + " Info Email:"+info.email+ " Info Password:"+info.password;
+            }
+
+        })
+        console.log(infos);
+        if (infos == "")
+            res.json({success:true,message:"No data found"})
+        else
+            res.json({success:true,message:infos})
+    }
+    catch(error)
+    {
+        res.json({success:false, message: error.message});
+    }
+}
+
+export {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe,verifyRazorpay,sendDataToClient}

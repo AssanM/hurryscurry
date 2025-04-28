@@ -13,6 +13,8 @@ const Add = ({token}) => {
   const [image4, setImage4] = useState(false)
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("Men");
@@ -39,6 +41,8 @@ const Add = ({token}) => {
       formData.append("game", game);
       formData.append("categoryFilter", categoryFilter);
       formData.append("region", region);
+      formData.append("email", email);
+      formData.append("password", password);
 
       image1 && formData.append("image1", image1)
       image2 && formData.append("image2", image2)
@@ -216,7 +220,14 @@ const Add = ({token}) => {
         <input onChange={()=>setBestseller(prev=>!prev)} checked={bestseller} type="checkbox" id='bestseller' />
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
-
+      <div className='w-full'>
+        <p className='mb-2'>Product Email</p>
+        <input onChange={(e)=>setEmail(e.target.value)} value={email} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
+      </div>
+      <div className='w-full'>
+        <p className='mb-2'>Product Password</p>
+        <input onChange={(e)=>setPassword(e.target.value)} value={password} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
+      </div>
       <button type='submit' className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
     </form>

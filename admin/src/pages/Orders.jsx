@@ -41,7 +41,27 @@ const Orders = ({token}) => {
       toast.error(error.message)
     }
   }
-
+  const onInfoSubmitHandler = async(e, orderId)=>{
+    e.preventDefault();
+    /*const order = orders.find((element)=>{
+      return element._id == orderId
+    })
+    
+    const email = order.address.email;
+    
+    console.log(email);*/
+    try {
+      const response  = await axios.post(backendUrl+'/api/order/sendInfo',{orderId},{headers:{token}})
+      if (response.data.success) {
+        toast.info(response.data.message)
+      }
+      else{
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
   useEffect(()=>{
     fetchAllOrders();
   },[token])
@@ -85,6 +105,9 @@ const Orders = ({token}) => {
                 <option value="Out for delivery">Out for delivery</option>
                 <option value="Delivered">Delivered</option>
               </select>
+              <form onSubmit={(event)=>onInfoSubmitHandler(event,order._id)}>
+              <button type='submit' className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>Send Info</button>
+              </form>
             </div>
           ))
         }
