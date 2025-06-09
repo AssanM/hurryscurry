@@ -17,6 +17,8 @@ import Verify from './pages/Verify'
 import ChangeEmail from './pages/ChangeEmail'
 import HowToBuy from './pages/HowToBuy'
 import HowToLogin from './pages/HowToLogin'
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 const App = () => {
   return (
@@ -38,6 +40,8 @@ const App = () => {
         <Route path='/changeEmail' element={<ChangeEmail/>}/>
         <Route path='/howtobuy' element={<HowToBuy/>}/>
         <Route path='/howtologin' element={<HowToLogin/>}/>
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Routes>
       <Footer/>
     </div>

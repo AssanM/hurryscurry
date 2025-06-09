@@ -22,7 +22,15 @@ const Navbar = () => {
           <p>ГЛАВНАЯ</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
         </NavLink>
-        <NavLink to='/collection' className='flex flex-col items-center gap-1'>
+        <NavLink to="/privacy" className="flex flex-col items-center gap-1">
+          <p>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</p>
+          <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
+        </NavLink>
+        <NavLink to="/terms" className="flex flex-col items-center gap-1">
+          <p>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</p>
+          <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
+        </NavLink>
+        {/*<NavLink to='/collection' className='flex flex-col items-center gap-1'>
           <p>КОЛЛЕКЦИЯ</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
         </NavLink>
@@ -30,6 +38,7 @@ const Navbar = () => {
           <p>КАК КУПИТЬ</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
         </NavLink>
+        */}
         <NavLink to='/changeEmail' className='flex flex-col items-center gap-1'>
           <p>СМЕНА ПОЧТЫ</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-100 hidden'/>
@@ -79,6 +88,8 @@ const Navbar = () => {
             <p>Back</p>
           </div>
           <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/'>Главная</NavLink>
+          <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/privacy'>Политика конфиденциальности</NavLink>
+          <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/terms'>Пользовательское соглашение</NavLink>
           <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/collection'>Коллекция</NavLink>
           <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/howtobuy'>Как купить</NavLink>
           <NavLink onClick={()=>setVisible(false)} className='py-2 pl-6 border' to='/changeEmail'>Смена почты</NavLink>

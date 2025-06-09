@@ -16,7 +16,9 @@ const Contact = () => {
         <div className='flex flex-col justify-center items-center items-start gap-6'>
           <p className='font-semibold text-xl text-gray-300'>Our Store</p>
           
+          {/*
            <p className='text-gray-300'>Address <br /> KZ</p>
+           */}
            <SocialIcon network='telegram' href='https://t.me/HurryScurryStore' target='blank' label='Hurry Scurry'/>
           {/*<p className='text-gray-300'>Tel: 123456468979 <br />a@a.com</p>          
           <p className='font-semibold text-xl text-gray-200'>Careers at HurryScurry</p>

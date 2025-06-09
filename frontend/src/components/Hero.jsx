@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import {assets} from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
 import Carousel from '../pages/Carousel'
+import newBanner from '../assets/promo2-2.png';
 
 const Hero = () => {
     const {promotions} = useContext(ShopContext);
-  return (
+  {/*return (
     <div className={`flex h-full flex-com sm:flex-row border border-gray-400 bg-black bg-[url(${assets.hero_img})]`}>
-        {/* Hero Left Side */}
+        {/* Hero Left Side
         <div className='w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0'>
             <div className='text-gray-200'>
                 <div className='flex items-center gap-2'>
@@ -19,14 +20,20 @@ const Hero = () => {
                     <p className='font-semibold text-sm md:text-base'>SHOP NOW</p>
                     <p className='w-8 md:w-11 h-[1px] bg-[#414141]'></p>
                 </div>
-                */}
+                
             </div>
         </div>
-        {/* Hero Right Side */}
-        {/*<img src={assets.promotion} className='w-full h-[50%] sm:w-1/2' alt="" />*/}
+        {/* Hero Right Side
+        {/*<img src={assets.promotion} className='w-full h-[50%] sm:w-1/2' alt="" />
         <Carousel data={promotions}/>
     </div>
-  )
+  )*/}
+  return (
+  <div
+  className="w-full h-96 bg-contain bg-no-repeat bg-center"
+    style={{ backgroundImage: `url(${newBanner})` }}
+  ></div>
+);
 }
 
 export default Hero
