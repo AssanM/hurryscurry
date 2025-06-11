@@ -13,8 +13,8 @@ const Add = ({token}) => {
   const [image4, setImage4] = useState(false)
 
   const [accountData, setAccountData] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  /*const [name, setName] = useState("");
+  const [email, setEmail] = useState("");*/
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -43,8 +43,8 @@ const Add = ({token}) => {
       formData.append("categoryFilter", categoryFilter);
       formData.append("region", region);
       formData.append("accountData", accountData);
-      formData.append("email", email);
-      formData.append("password", password);
+      /*formData.append("email", email);
+      formData.append("password", password);*/
 
       image1 && formData.append("image1", image1)
       image2 && formData.append("image2", image2)
@@ -226,6 +226,8 @@ const Add = ({token}) => {
         <p className='mb-2'>Account Data</p>
         <input onChange={(e)=>setAccountData(e.target.value)} value={accountData} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
       </div>
+      {false && (
+    <div>
       <div className='w-full'>
         <p className='mb-2'>Product Email</p>
         <input onChange={(e)=>setEmail(e.target.value)} value={email} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' /*required*/ />
@@ -234,6 +236,8 @@ const Add = ({token}) => {
         <p className='mb-2'>Product Password</p>
         <input onChange={(e)=>setPassword(e.target.value)} value={password} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' /*required*/ />
       </div>
+    </div>
+                )}
       <button type='submit' className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
     </form>

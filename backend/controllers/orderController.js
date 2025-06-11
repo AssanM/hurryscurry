@@ -222,7 +222,7 @@ const sendDataToClient = async (req, res)=>{
             const info =productData.find((data) => {return data.productId == product._id});
             if (info !=null)
             {
-                infos = infos+" Product Id :"+ product._id + " Account Data"+info.accountData+ " Info Email:"+info.email+ " Info Password:"+info.password;
+                infos = infos+" Product Id :"+ product._id + " Account Data"+info.accountData/*+ " Info Email:"+info.email+ " Info Password:"+info.password*/;
             }
 
         })
