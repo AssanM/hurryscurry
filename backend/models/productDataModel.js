@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const productDataSchema = new mongoose.Schema({
+    accountData: { type: String, required: true },
     email: {type:String, required: true},
     password: {type:String, required: true},
     productId :{type: String, required:true}

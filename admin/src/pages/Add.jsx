@@ -12,6 +12,7 @@ const Add = ({token}) => {
   const [image3, setImage3] = useState(false)
   const [image4, setImage4] = useState(false)
 
+  const [accountData, setAccountData] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +42,7 @@ const Add = ({token}) => {
       formData.append("game", game);
       formData.append("categoryFilter", categoryFilter);
       formData.append("region", region);
+      formData.append("accountData", accountData);
       formData.append("email", email);
       formData.append("password", password);
 
@@ -219,6 +221,10 @@ const Add = ({token}) => {
       <div className='flex gap-2 mt-2'>
         <input onChange={()=>setBestseller(prev=>!prev)} checked={bestseller} type="checkbox" id='bestseller' />
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
+      </div>
+      <div className='w-full'>
+        <p className='mb-2'>Product Data</p>
+        <input onChange={(e)=>setAccountData(e.target.value)} value={accountData} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
       </div>
       <div className='w-full'>
         <p className='mb-2'>Product Email</p>
