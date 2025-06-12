@@ -54,4 +54,3 @@ const Login = ({setToken}) => {
 }
 
 export default Login
-
