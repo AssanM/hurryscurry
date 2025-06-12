@@ -11,11 +11,14 @@ const Add = ({token}) => {
   const [image2, setImage2] = useState(false)
   const [image3, setImage3] = useState(false)
   const [image4, setImage4] = useState(false)
+  const [image5, setImage5] = useState(false)
+  const [image6, setImage6] = useState(false)
+  const [image7, setImage7] = useState(false)
 
   const [accountData, setAccountData] = useState("");
-  /*const [name, setName] = useState("");
-  const [email, setEmail] = useState("");*/
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  /*const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");*/
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("Men");
@@ -50,6 +53,9 @@ const Add = ({token}) => {
       image2 && formData.append("image2", image2)
       image3 && formData.append("image3", image3)
       image4 && formData.append("image4", image4)
+      image5 && formData.append("image5", image5)
+      image6 && formData.append("image6", image6)
+      image7 && formData.append("image7", image7)
 
       const response = await axios.post(backendUrl + "/api/product/add", formData,{headers:{token}})
       
@@ -61,6 +67,9 @@ const Add = ({token}) => {
         setImage2(false)
         setImage3(false)
         setImage4(false)
+        setImage5(false)
+        setImage6(false)
+        setImage7(false)
         setPrice('')
         setSizes([])
         setBestseller(false)
@@ -121,16 +130,34 @@ const Add = ({token}) => {
             <img className='w-20' src={!image4 ? assets.upload_area : URL.createObjectURL(image4)} alt="" />
             <input onChange={(e)=>setImage4(e.target.files[0])} type="file" id='image4' hidden/>
           </label>
+          <label htmlFor="image5">
+            <img className='w-20' src={!image5 ? assets.upload_area : URL.createObjectURL(image5)} alt="" />
+            <input onChange={(e)=>setImage5(e.target.files[0])} type="file" id='image5' hidden/>
+          </label>
+          <label htmlFor="image6">
+            <img className='w-20' src={!image6 ? assets.upload_area : URL.createObjectURL(image6)} alt="" />
+            <input onChange={(e)=>setImage6(e.target.files[0])} type="file" id='image6' hidden/>
+          </label>
+          <label htmlFor="image7">
+            <img className='w-20' src={!image7 ? assets.upload_area : URL.createObjectURL(image7)} alt="" />
+            <input onChange={(e)=>setImage7(e.target.files[0])} type="file" id='image7' hidden/>
+          </label>
         </div>
       </div>
       <div className='w-full'>
         <p className='mb-2'>Product name</p>
         <input onChange={(e)=>setName(e.target.value)} value={name} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
-      </div>
-      <div className='w-full'>
-        <p className='mb-2'>Product description</p>
-        <textarea onChange={(e)=>setDescription(e.target.value)} value={description} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Write content here' required />
-      </div>
+      </div><div className='w-full'>
+  <p className='mb-2'>Product description</p>
+  <textarea
+    onChange={(e) => setDescription(e.target.value)}
+    value={description}
+    className='w-full max-w-[500px] px-3 py-2 h-32 resize-y border rounded'
+    placeholder='Write content here'
+    required
+  />
+</div>
+
       <div className='flex flex-col sm:flex-row gap-2 w-full sm:gap-8'>
         <div >
           <p className='mb-2'>Game</p>
@@ -223,18 +250,25 @@ const Add = ({token}) => {
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
       <div className='w-full'>
-        <p className='mb-2'>Account Data</p>
-        <input onChange={(e)=>setAccountData(e.target.value)} value={accountData} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
-      </div>
+  <p className='mb-2'>Account Data</p>
+  <textarea
+    onChange={(e) => setAccountData(e.target.value)}
+    value={accountData}
+    className='w-full max-w-[500px] px-3 py-2 h-32 resize-y border rounded'
+    placeholder='Type here...'
+    required
+  />
+</div>
+
       {false && (
     <div>
       <div className='w-full'>
         <p className='mb-2'>Product Email</p>
-        <input onChange={(e)=>setEmail(e.target.value)} value={email} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' /*required*/ />
+        <input onChange={(e)=>setEmail(e.target.value)} value={email} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
       </div>
       <div className='w-full'>
         <p className='mb-2'>Product Password</p>
-        <input onChange={(e)=>setPassword(e.target.value)} value={password} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' /*required*/ />
+        <input onChange={(e)=>setPassword(e.target.value)} value={password} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
       </div>
     </div>
                 )}

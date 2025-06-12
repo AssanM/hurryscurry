@@ -209,33 +209,32 @@ const updateStatus = async (req, res)=>{
     }
 }
 
-const sendDataToClient = async (req, res)=>{
-    try{
-        const {orderId} = req.body;
-        const order  =await orderModel.findById(orderId);
-        const products = order.items;
-        var infos = "";
-        infos = "Customer Email:"+order.address.email;
-        const productData = await productDataModel.find({});
-        products.map(async (product)=>
-        {
-            const info =productData.find((data) => {return data.productId == product._id});
-            if (info !=null)
-            {
-                infos = infos+" Product Id :"+ product._id + " Account Data"+info.accountData/*+ " Info Email:"+info.email+ " Info Password:"+info.password*/;
-            }
+const sendDataToClient = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    const order = await orderModel.findById(orderId);
+    const products = order.items;
+    let infos = `Customer Email: ${order.address.email}\n`;
 
-        })
-        console.log(infos);
-        if (infos == "")
-            res.json({success:true,message:"No data found"})
-        else
-            res.json({success:true,message:infos})
+    const productData = await productDataModel.find({});
+
+    for (const product of products) {
+      const info = productData.find(data => data.productId == product._id);
+      if (info) {
+        infos += `\nProduct Id: ${product._id}\nAccount Data:\n${info.accountData}\n`;
+      }
     }
-    catch(error)
-    {
-        res.json({success:false, message: error.message});
-    }
-}
+
+    console.log(infos);
+
+    if (infos.trim() === "")
+      res.json({ success: true, message: "No data found" });
+    else
+      res.json({ success: true, message: infos });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 
 export {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe,verifyRazorpay,sendDataToClient}
