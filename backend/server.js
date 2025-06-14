@@ -21,12 +21,11 @@ connectCloudinary()
 // Middlewares
 app.use(express.json())
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174", "https://hurry-scurry.com", "https://admin.hurry-scurry.com", "https://www.admin.hurry-scurry.com"],
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://hurry-scurry.com", "https://admin.hurry-scurry.com", "https://www.admin.hurry-scurry.com", "https://www.hurry-scurry.com"],
   credentials: true
 }));
 
 // api endpoints
-
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart',cartRouter)
