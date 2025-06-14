@@ -12,15 +12,9 @@ import promotionRouter from './routes/promotionRoute.js'
 
 
 // App Config
-<<<<<<< Updated upstream
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
-=======
 const app = express()
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 const port = process.env.PORT || 4001
 
 connectDB()
