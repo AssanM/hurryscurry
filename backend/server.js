@@ -40,4 +40,8 @@ app.get('/',(req,res)=>{
     res.send("API Working")
 })
 
+<<<<<<< Updated upstream
 app.listen(port,()=> console.log('Server started on Port :' + port))
+=======
+app.listen(port,()=> console.log('Server started on Port :' + port))
+>>>>>>> Stashed changes
