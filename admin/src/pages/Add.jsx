@@ -251,30 +251,21 @@ const Add = ({token}) => {
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
       <div className='w-full'>
-  <p className='mb-2'>Account Data</p>
-  <textarea
-    onChange={(e) => setAccountData(e.target.value)}
-    value={accountData}
-    className='w-full max-w-[500px] px-3 py-2 h-32 resize-y border rounded'
-    placeholder='Type here...'
-    required
-  />
-</div>
-
-      {false && (
-    <div>
-      <div className='w-full'>
-        <p className='mb-2'>Product Email</p>
-        <input onChange={(e)=>setEmail(e.target.value)} value={email} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
+<p className='mb-2'>Account Data</p>
+        <textarea
+          onChange={(e) => setAccountData(e.target.value)}
+          value={accountData}
+          className='w-full max-w-[500px] px-3 py-2 h-32 resize-y border rounded'
+          placeholder='Type here...'
+          required
+        />
       </div>
-      <div className='w-full'>
-        <p className='mb-2'>Product Password</p>
-        <input onChange={(e)=>setPassword(e.target.value)} value={password} className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required />
-      </div>
-    </div>
-                )}
-      <button type='submit' className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
-
+      <button
+        type='submit'
+        className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'
+      >
+        ADD
+      </button>
     </form>
   )
 }

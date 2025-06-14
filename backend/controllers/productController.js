@@ -6,7 +6,7 @@ import productDataModel from "../models/productDataModel.js";
 // function for add product
 const addProduct = async (req,res)=>{
     try {
-        const  {name, description, price, bestseller, game, region, categoryFilter, /*, email, password*/}  = req.body;
+        const  {name, description, price, bestseller, game, region, categoryFilter, accountData}  = req.body;
         const image1 = req.files.image1 && req.files.image1[0];
         const image2 = req.files.image2 && req.files.image2[0];
         const image3 = req.files.image3 && req.files.image3[0];
@@ -31,6 +31,7 @@ const addProduct = async (req,res)=>{
             region,
             price:Number(price),
             categoryFilter,
+            accountData,
             bestseller:bestseller === "true"? true:false,
             image:imagesUrl,
             date: Date.now()
@@ -41,8 +42,6 @@ const addProduct = async (req,res)=>{
         
         const productDataClient ={
             accountData,
-            /*email,
-            password,*/
             productId
         }
 

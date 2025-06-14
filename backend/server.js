@@ -13,7 +13,7 @@ import promotionRouter from './routes/promotionRoute.js'
 
 // App Config
 const app = express()
-const port = process.env.PORT || 4001
+const port = process.env.PORT || 4002
 
 connectDB()
 connectCloudinary()
@@ -36,3 +36,8 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(port,()=> console.log('Server started on Port :' + port))
+
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://hurry-scurry.com", "https://admin.hurry-scurry.com"],
+  credentials: true
+}));
