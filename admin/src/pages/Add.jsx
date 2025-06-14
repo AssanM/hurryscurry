@@ -14,6 +14,7 @@ const Add = ({token}) => {
   const [image5, setImage5] = useState(false)
   const [image6, setImage6] = useState(false)
   const [image7, setImage7] = useState(false)
+  const [image8, setImage8] = useState(false)
 
   const [accountData, setAccountData] = useState("");
   const [name, setName] = useState("");
@@ -56,6 +57,8 @@ const Add = ({token}) => {
       image5 && formData.append("image5", image5)
       image6 && formData.append("image6", image6)
       image7 && formData.append("image7", image7)
+      image8 && formData.append("image8", image8)
+      
 
       const response = await axios.post(backendUrl + "/api/product/add", formData,{headers:{token}})
       
@@ -70,6 +73,7 @@ const Add = ({token}) => {
         setImage5(false)
         setImage6(false)
         setImage7(false)
+        setImage8(false)
         setPrice('')
         setSizes([])
         setBestseller(false)
@@ -114,10 +118,6 @@ const Add = ({token}) => {
         <p className='mb-2'> Upload Image</p>
 
         <div className='flex gap-2'>
-          <label htmlFor="image1">
-            <img className='w-20' src={!image1 ? assets.upload_area : URL.createObjectURL(image1)} alt="" />
-            <input onChange={(e)=>setImage1(e.target.files[0])} type="file" id='image1' hidden/>
-          </label>
           <label htmlFor="image2">
             <img className='w-20' src={!image2 ? assets.upload_area : URL.createObjectURL(image2)} alt="" />
             <input onChange={(e)=>setImage2(e.target.files[0])} type="file" id='image2' hidden/>
@@ -141,6 +141,10 @@ const Add = ({token}) => {
           <label htmlFor="image7">
             <img className='w-20' src={!image7 ? assets.upload_area : URL.createObjectURL(image7)} alt="" />
             <input onChange={(e)=>setImage7(e.target.files[0])} type="file" id='image7' hidden/>
+          </label>
+          <label htmlFor="image8">
+            <img className='w-20' src={!image8 ? assets.upload_area : URL.createObjectURL(image8)} alt="" />
+            <input onChange={(e)=>setImage8(e.target.files[0])} type="file" id='image8' hidden/>
           </label>
         </div>
       </div>
