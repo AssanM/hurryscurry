@@ -5,6 +5,7 @@ import axios from 'axios'
 import {backendUrl} from '../App'
 import {toast} from 'react-toastify'  
 
+
 const Add = ({token}) => {
 
   const [image1, setImage1] = useState(false)
@@ -22,6 +23,7 @@ const Add = ({token}) => {
   const [password, setPassword] = useState("");*/
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [accid, setAccid] = useState("");
   const [category, setCategory] = useState("Men");
   const [subCategory, setSubCategory] = useState("Topwear")
   const [bestseller,setBestseller] = useState(false);
@@ -39,6 +41,7 @@ const Add = ({token}) => {
       formData.append("name", name)
       formData.append("description", description)
       formData.append("price", price)
+      formData.append("accid", accid)
       //formData.append("category", category)
       //formData.append("subCategory", subCategory)
       formData.append("bestseller", bestseller)
@@ -60,7 +63,14 @@ const Add = ({token}) => {
       image8 && formData.append("image8", image8)
       
 
-      const response = await axios.post(backendUrl + "/api/product/add", formData,{headers:{token}})
+      const response = await axios.post(backendUrl + "/api/product/add", formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    token
+  },
+  maxBodyLength: Infinity,
+  maxContentLength: Infinity
+});
       
       if (response.data.success) {
         toast.success(response.data.message)
@@ -75,8 +85,10 @@ const Add = ({token}) => {
         setImage7(false)
         setImage8(false)
         setPrice('')
+        setAccid('')
         setSizes([])
         setBestseller(false)
+        setAccountData('')
       }
       else{
         toast.error(response.data.message)
@@ -118,6 +130,10 @@ const Add = ({token}) => {
         <p className='mb-2'> Upload Image</p>
 
         <div className='flex gap-2'>
+          <label htmlFor="image1">
+            <img className='w-20' src={!image1 ? assets.upload_area : URL.createObjectURL(image1)} alt="" />
+            <input onChange={(e)=>setImage1(e.target.files[0])} type="file" id='image1' hidden/>
+          </label>
           <label htmlFor="image2">
             <img className='w-20' src={!image2 ? assets.upload_area : URL.createObjectURL(image2)} alt="" />
             <input onChange={(e)=>setImage2(e.target.files[0])} type="file" id='image2' hidden/>
@@ -223,6 +239,10 @@ const Add = ({token}) => {
         <div>
           <p className='mb-2'>Product price</p>
           <input onChange={(e)=>setPrice(e.target.value)} value={price} className='w-full px-3 py-2 sm:w-[120px]' type="Number" placeholder='25' />
+        </div>
+        <div>
+          <p className='mb-2'>Product id</p>
+          <input onChange={(e)=>setAccid(e.target.value)} value={accid} className='w-full px-3 py-2 sm:w-[120px]' type="Number" placeholder='25' />
         </div>
       </div>
       {/* 
