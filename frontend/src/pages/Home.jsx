@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from '../components/Hero'
 import LatestCollection from '../components/LatestCollection'
 import BestSeller from '../components/BestSeller'
+import Catalog from '../components/Catalog';
 import OurPolicy from '../components/OurPolicy'
 import NewsLetterBox from '../components/NewsLetterBox'
 import { Helmet } from 'react-helmet'
@@ -15,6 +16,7 @@ const Home = () => {
         <meta name="description" content="Продажа аккаунтов Steam, Genshin Impact, HSR, ZZZ. Гарантия, низкие цены" />
       </Helmet>
       <Hero />
+      <Catalog/>
       <LatestCollection/>
       <BestSeller/>
       {/* <OurPolicy/>*/}

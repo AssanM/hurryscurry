@@ -1,25 +1,33 @@
 import express from 'express';
-import {placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus,verifyStripe, verifyRazorpay,sendDataToClient} from '../controllers/orderController.js'
-import adminAuth from '../middleware/adminAuth.js'
-import authUser from '../middleware/auth.js';
+import verifyToken from '../middleware/verifyToken.js';
+import {
+  placeOrder,
+  placeOrderStripe,
+  placeOrderRazorpay,
+  placeOrderWalletOne,
+  verifyStripe,
+  verifyRazorpay,
+  verifyWalletOne,
+  userOrders,
+  allOrders,
+  updateStatus,
+  sendDataToClient
+} from '../controllers/orderController.js';
 
-const orderRouter = express.Router();
-// Admin Features
-orderRouter.post('/list',adminAuth, allOrders);
-orderRouter.post('/status',adminAuth,updateStatus);
-orderRouter.post('/sendInfo',authUser,sendDataToClient)
+const router = express.Router();
 
-// Payment Features
-orderRouter.post('/place',authUser, placeOrder);
-orderRouter.post('/stripe',authUser, placeOrderStripe);
-orderRouter.post('/razorpay', authUser, placeOrderRazorpay);
+// Защищённые маршруты
+router.post('/place-order', verifyToken, placeOrder);
+router.post('/place-order-stripe', verifyToken, placeOrderStripe);
+router.post('/place-order-razorpay', verifyToken, placeOrderRazorpay);
+router.post('/place-order-walletone', verifyToken, placeOrderWalletOne);
+router.post('/user-orders', verifyToken, userOrders);
+router.post('/verify-stripe', verifyToken, verifyStripe);
+router.post('/verify-razorpay', verifyToken, verifyRazorpay);
+router.post('/send-data', verifyToken, sendDataToClient);
 
-// User Features
-orderRouter.post('/userorders', authUser, userOrders)
+// Необязательные:
+router.post('/verify-walletone', verifyWalletOne); // внешняя система, не из клиента
+router.get('/all-orders', allOrders); // или тоже можешь защитить
 
-// Verify payment
-orderRouter.post('/verifyStripe',authUser,verifyStripe)
-orderRouter.post('/verifyRazorpay',authUser,verifyRazorpay)
-
-
-export default orderRouter;
+export default router;

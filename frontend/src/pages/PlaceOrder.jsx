@@ -83,7 +83,23 @@ const PlaceOrder = () => {
         amount: getCartAmount() + delivery_fee
       }
 
+      if (!token) {
+  toast.error("Ошибка: пользователь не авторизован.");
+  return;
+}
+
+// Просто лог для отладки — можно удалить после теста
+console.log("🛡 Отправка заказа с токеном:", token);
+
       switch (method) {
+        case 'walletone':
+  const responseW1 = await axios.post(backendUrl + '/api/order/walletone', orderData, { headers: { token } });
+  if (responseW1.data.success) {
+    window.location.replace(responseW1.data.redirect_url);
+  } else {
+    toast.error(responseW1.data.message);
+  }
+  break;
         case 'cod':
           const response = await axios.post(backendUrl+'/api/order/place',orderData,{headers:{token}})
           if (response.data.success) {
@@ -120,6 +136,34 @@ const PlaceOrder = () => {
       toast.error(error.message)
     }
   }  
+  
+
+const handlePayment = async () => {
+  try {
+    const response = await fetch('http://localhost:4001/api/walletone/create-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: 1000, // пример суммы
+        email: 'user@example.com'
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // перенаправляем на платёжную ссылку
+      window.location.href = data.url;
+    } else {
+      alert("Ошибка при создании платежа");
+    }
+  } catch (error) {
+    console.error("Ошибка:", error);
+    alert("Произошла ошибка при оплате.");
+  }
+};
 
   return (
     <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
@@ -155,6 +199,10 @@ const PlaceOrder = () => {
           <Title text1={'PAYMENT'} text2={'METHOD'}/>
           {/* Payment Method Selection */}
           <div className='flex gap-3 flex-col lg:flex-row'>
+            <div onClick={() => setMethod('walletone')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'walletone' ? 'bg-green-400' : ''}`}></p>
+  <img className='h-5 mx-4' src="https://static.w1.ru/logo/logo.svg" alt="Wallet One" />
+</div>
             <div onClick={()=>setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe'?'bg-green-400':''}`}></p>
               <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />

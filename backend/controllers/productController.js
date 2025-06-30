@@ -38,7 +38,7 @@ const addProduct = async (req,res)=>{
         const imagesUrl = await Promise.all(
           images.map(async (item) => {
             const compressedBuffer = await sharp(item.path)
-              .jpeg({ quality: 90 })
+              .jpeg({ quality: 70 })
               .toBuffer();
 
             const tempFilePath = `temp_${uuidv4()}.jpg`;

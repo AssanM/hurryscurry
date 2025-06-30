@@ -34,7 +34,7 @@ const Footer = () => {
         <div>
             <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
             <ul className='flex flex-col gap-1 text-gray-300'>                
-                <li>hitmeup@gmail.com</li>
+                <li>ИП Hurry-Scurry</li>
                 <SocialIcon network='telegram' href='https://t.me/HurryScurryStore' target='blank' label='Hurry Scurry'/>
             </ul>
         </div>
