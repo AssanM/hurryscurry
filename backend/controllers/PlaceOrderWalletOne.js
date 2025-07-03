@@ -44,14 +44,10 @@ const placeOrderWalletOne = async (req, res) => {
 
 export {
   placeOrder,
-  placeOrderStripe,
-  placeOrderRazorpay,
-  placeOrderWalletOne, // ✅ сюда
+  placeOrderWalletOne,
   allOrders,
   userOrders,
   updateStatus,
-  verifyStripe,
-  verifyRazorpay,
   sendDataToClient,
   // verifyWalletOne (если используешь)
 }
