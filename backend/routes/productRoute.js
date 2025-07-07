@@ -19,7 +19,7 @@ productRouter.post('/remove',adminAuth, removeProduct)
 productRouter.post('/single', singleProduct)
 productRouter.get('/list', listProducts)
 
-// PUT — обновление товара по ID
-router.put("/update/:id", updateProduct);
+productRouter.put("/update/:id", updateProduct);
+console.log("productRoute loaded");
 
 export default productRouter;

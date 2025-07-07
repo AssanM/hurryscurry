@@ -123,24 +123,33 @@ const singleProduct = async (req,res)=>{
     }
 };
 
-// Обновление товара по ID
 const updateProduct = async (req, res) => {
   try {
-    const productId = req.params.id;
-    const updateData = req.body;
+    const { name, price, category, image, accid, description } = req.body;
+    const updateFields = {};
 
-    const updatedProduct = await productModel.findByIdAndUpdate(productId, updateData, {
-      new: true,
-    });
+    if (name !== undefined) updateFields.name = name;
+    if (price !== undefined) updateFields.price = price;
+    if (category !== undefined) updateFields.category = category;
+    if (image !== undefined) updateFields.image = image;
+    if (accid !== undefined) updateFields.accid = accid;
+    if (description !== undefined) updateFields.description = description;
 
-    if (!updatedProduct) {
-      return res.status(404).json({ success: false, message: "Товар не найден" });
+    const updated = await productModel.findByIdAndUpdate(
+      req.params.id,
+      updateFields,
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.json({ success: false, message: "Product not found" });
     }
 
-    res.json({ success: true, message: "Товар обновлён", product: updatedProduct });
+    res.json({ success: true, message: "Product updated", product: updated });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error(error);
+    res.json({ success: false, message: error.message });
   }
 };
 
-export {listProducts, addProduct, removeProduct, singleProduct};
+export {listProducts, addProduct, removeProduct, singleProduct, updateProduct};
