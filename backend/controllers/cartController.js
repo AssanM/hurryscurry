@@ -1,67 +1,47 @@
-import userModel from "../models/userModel.js";
+// controllers/cartController.js
 
+// Корзина больше не сохраняется в БД, всё приходит с фронта
 
-// add products to user cart
-const addToCart = async (req,res)=>{
-    try {
-        const {userId, itemId, size} = req.body;
-        const userData = await userModel.findById(userId);
-        let cartData = await userData.cartData;
+const addToCart = async (req, res) => {
+  try {
+    const { itemId, size } = req.body;
 
-        if (cartData[itemId]) {
-            if(cartData[itemId][size]){
-                cartData[itemId][size] +=1;
-            }
-            else{
-                cartData[itemId][size] = 1;
-            }
-        }
-        else
-        {
-            cartData[itemId] = {}
-            cartData[itemId][size] = 1
-        }
-
-        await userModel.findByIdAndUpdate(userId, {cartData})
-        res.json({success:true, message:"Added To Cart"})
-console.log('Done');
-
-    } catch (error) {
-        console.log(error);
-        
-        res.json({success:false, message:error.message}) 
+    if (!itemId || !size) {
+      return res.status(400).json({ success: false, message: 'itemId and size are required' });
     }
 
-}
+    // Эмуляция корзины — на фронте ты будешь держать объект cartData и слать его сюда
+    return res.json({ success: true, message: 'Added to cart (frontend-managed)' });
+  } catch (error) {
+    console.error('Add to cart error:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
-// update user cart
-const updateCart = async (req,res)=>{
-    try {
-        const {userId, itemId, size, quantity} = req.body;
-        const userData = await userModel.findById(userId);
-        let cartData = await userData.cartData;
+const updateCart = async (req, res) => {
+  try {
+    const { itemId, size, quantity } = req.body;
 
-        cartData[itemId][size] = quantity;
-        await userModel.findByIdAndUpdate(userId, {cartData})
-        res.json({success:true, message:"Cart Updated"})
-
-    } catch (error) {
-        res.json({success:false, message:error.message}) 
+    if (!itemId || !size || typeof quantity !== 'number') {
+      return res.status(400).json({ success: false, message: 'Invalid input' });
     }
 
-}
+    // Просто подтверждаем обновление — всё делается на фронте
+    return res.json({ success: true, message: 'Cart updated (frontend-managed)' });
+  } catch (error) {
+    console.error('Update cart error:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
-// get user cart data
-const getUserCart = async (req,res)=>{
-    try {
-        const {userId} = req.body;
-        const userData = await userModel.findById(userId);
-        let cartData = await userData.cartData;
-        res.json({success:true, cartData})
+const getUserCart = async (req, res) => {
+  try {
+    // В гостевом режиме корзина не хранится на сервере
+    return res.json({ success: true, cartData: {} });
+  } catch (error) {
+    console.error('Get cart error:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
-    } catch (error) {
-        res.json({success:false, message:error.message}) 
-    }
-}
-
-export {addToCart, updateCart, getUserCart}
+export { addToCart, updateCart, getUserCart };

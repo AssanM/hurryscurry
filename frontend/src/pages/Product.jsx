@@ -28,7 +28,7 @@ const Product = () => {
   const handleBuyNow = () => {
 
     addToCart(productData._id); // Добавляем в корзину
-    navigate('/placeorder');         // Переходим к оформлению
+    navigate('/place-order');         // Переходим к оформлению
   };
 
   return productData ? (

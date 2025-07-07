@@ -123,4 +123,24 @@ const singleProduct = async (req,res)=>{
     }
 };
 
+// Обновление товара по ID
+const updateProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const updateData = req.body;
+
+    const updatedProduct = await productModel.findByIdAndUpdate(productId, updateData, {
+      new: true,
+    });
+
+    if (!updatedProduct) {
+      return res.status(404).json({ success: false, message: "Товар не найден" });
+    }
+
+    res.json({ success: true, message: "Товар обновлён", product: updatedProduct });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export {listProducts, addProduct, removeProduct, singleProduct};

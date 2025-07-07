@@ -50,11 +50,11 @@ function createW1Signature(params, secretKey) {
 const placeOrderWalletOne = async (req, res) => {
   try {
     const { items, amount, address } = req.body;
-    const userId = req.user._id;
-    console.log('Новый заказ от пользователя:', userId);
+    const userId = req.user?._id || null; // может быть null
+    console.log('Новый заказ от пользователя:', userId || 'ГОСТЬ');
 
     const orderData = {
-      userId,
+      userId, // может быть null
       items,
       address,
       amount,
@@ -62,14 +62,15 @@ const placeOrderWalletOne = async (req, res) => {
       payment: false,
       date: Date.now(),
     };
+
     const newOrder = await new orderModel(orderData).save();
 
-    const redirectUrl = 'https://w1.ru/checkout/checkout/Index'; // боевой или тестовый
+    const redirectUrl = 'https://w1.ru/checkout/checkout/Index';
 
     const params = {
       WMI_MERCHANT_ID: process.env.W1_MERCHANT_ID,
       WMI_PAYMENT_AMOUNT: amount.toFixed(2),
-      WMI_CURRENCY_ID: "643", // RUR
+      WMI_CURRENCY_ID: "643",
       WMI_PAYMENT_NO: newOrder._id.toString(),
       WMI_DESCRIPTION: Buffer.from("Оплата заказа на сайте").toString("base64"),
       WMI_SUCCESS_URL: `${process.env.FRONTEND_URL}/verify?success=true&orderId=${newOrder._id}`,
@@ -83,6 +84,7 @@ const placeOrderWalletOne = async (req, res) => {
     const finalUrl = `${redirectUrl}?${urlParams}`;
 
     res.json({ success: true, redirect_url: finalUrl });
+
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -113,13 +115,17 @@ const verifyWalletOne = async (req, res) => {
     }
 
     if (WMI_ORDER_STATE === 'Accepted') {
-      await orderModel.findByIdAndUpdate(WMI_PAYMENT_NO, { payment: true });
-      await userModel.findByIdAndUpdate(order.userId, { cartData: {} });
-      console.log('WalletOne verify received:', req.body);
-      return res.send("WMI_RESULT=OK");
-    } else {
-      return res.send(`WMI_RESULT=RETRY&WMI_DESCRIPTION=Order state: ${WMI_ORDER_STATE}`);
-    }
+  await orderModel.findByIdAndUpdate(WMI_PAYMENT_NO, { payment: true });
+
+  if (order.userId) {
+    await userModel.findByIdAndUpdate(order.userId, { cartData: {} });
+  }
+
+  console.log('WalletOne verify received:', req.body);
+  return res.send("WMI_RESULT=OK");
+} else {
+  return res.send(`WMI_RESULT=RETRY&WMI_DESCRIPTION=Order state: ${WMI_ORDER_STATE}`);
+}
 
   } catch (error) {
     console.error(error);

@@ -12,9 +12,10 @@ const Contact = () => {
       </div>
       
       <div className='my-10 flex flex-col justify-center md:flex-row gap-10 mb-28'>
-        <img className='w-full md:max-w-[480px]' src={assets.logo} alt="" />
         <div className='flex flex-col justify-center items-center items-start gap-6'>
-          <p className='font-semibold text-xl text-gray-300'>Our Store</p>
+          <p className='font-semibold text-xl text-gray-300'>ИП Hurry-Scurry</p>
+          <p className='font-semibold text-xl text-gray-300'>ИИН/БИН-590827400448</p>
+
           
           {/*
            <p className='text-gray-300'>Address <br /> KZ</p>

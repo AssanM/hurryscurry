@@ -1,4 +1,5 @@
 import express from 'express'
+import { updateProduct } from "../controllers/productController.js";
 import {listProducts, addProduct, removeProduct, singleProduct} from '../controllers/productController.js'
 import upload from '../middleware/multer.js';
 import adminAuth from '../middleware/adminAuth.js';
@@ -17,5 +18,8 @@ productRouter.post('/add',adminAuth,upload.fields([{name:'image1', maxCount:1},
 productRouter.post('/remove',adminAuth, removeProduct)
 productRouter.post('/single', singleProduct)
 productRouter.get('/list', listProducts)
+
+// PUT — обновление товара по ID
+router.put("/update/:id", updateProduct);
 
 export default productRouter;
