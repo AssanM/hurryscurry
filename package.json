@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "nodemailer": "^7.0.4",
+    "sitemap": "^8.0.0",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.12.0"
   }
 }

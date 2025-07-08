@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prerender": "node prerender.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.2",
+    "puppeteer": "^24.12.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",
