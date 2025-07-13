@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "generate-sitemap": "node generate-sitemap.js",
+    "build:full": "vite build && node generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "prerender": "node prerender.js"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@tailwindcss/vite": "^4.0.9",
     "axios": "^1.8.2",
     "puppeteer": "^24.12.0",

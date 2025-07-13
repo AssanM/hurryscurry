@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
+import { Helmet } from 'react-helmet';
 
 const Product = () => {
   const { productId } = useParams();
@@ -26,13 +27,27 @@ const Product = () => {
   }, [productId, products]);
 
   const handleBuyNow = () => {
-
-    addToCart(productData._id); // Добавляем в корзину
-    navigate('/place-order');         // Переходим к оформлению
+    addToCart(productData._id);
+    navigate('/place-order');
   };
 
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
+      {/* 🔻 Helmet для мета-тегов */}
+      <Helmet>
+        <title>{productData.name} — Купить аккаунт | Hurry-Scurry</title>
+        <meta name="description" content={`Купите ${productData.name} всего за ${productData.price} ${currency}. Быстрая доставка и гарантия качества.`} />
+        <meta property="og:title" content={`${productData.name} — Купить аккаунт | Hurry-Scurry`} />
+        <meta property="og:description" content={`Игровой аккаунт ${productData.name} за ${productData.price} ${currency}. Надёжная покупка.`} />
+        <meta property="og:image" content={productData.image[0]} />
+        <meta property="og:url" content={`https://hurry-scurry.com/product/${productData._id}`} />
+        <meta property="og:type" content="product" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${productData.name} — Купить аккаунт`} />
+        <meta name="twitter:description" content={`Цена: ${productData.price} ${currency}. Быстро, выгодно, безопасно.`} />
+        <meta name="twitter:image" content={productData.image[0]} />
+      </Helmet>
+
       {/* Product Data */}
       <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
         {/* Product Images */}

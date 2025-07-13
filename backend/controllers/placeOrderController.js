@@ -12,7 +12,7 @@ const placeOrder = async (req, res) => {
       <p><strong>Адрес:</strong> ${address}</p>
       <hr />
       <p><strong>Товар:</strong> ${title} (${item})</p>
-      <p><strong>Цена:</strong> ${price}₽</p>
+      <p><strong>Цена:</strong> ${price}₸</p>
     `;
 
     const transporter = nodemailer.createTransport({

@@ -6,6 +6,7 @@ import Catalog from '../components/Catalog'
 import OurPolicy from '../components/OurPolicy'
 import NewsLetterBox from '../components/NewsLetterBox'
 import { Helmet } from 'react-helmet'
+import Collection from './Collection'
 
 const Home = () => {
   return (
@@ -38,9 +39,9 @@ const Home = () => {
       </Helmet>
 
       <Hero />
-      <Catalog />
-      <LatestCollection />
-      <BestSeller />
+      <Collection />
+      {/* <LatestCollection /> */}
+      {/* <BestSeller /> */}
       {/* <OurPolicy /> */}
       {/* <NewsLetterBox /> */}
     </div>

@@ -2,7 +2,6 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Collection from './pages/Collection'
-import About from './pages/About'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
@@ -15,7 +14,6 @@ import SearchBar from './components/SearchBar'
 import {ToastContainer, toast} from 'react-toastify';
 import Verify from './pages/Verify'
 import ChangeEmail from './pages/ChangeEmail'
-import HowToBuy from './pages/HowToBuy'
 import HowToLogin from './pages/HowToLogin'
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
@@ -29,7 +27,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/collection' element={<Collection/>} />
-        <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/product/:productId' element={<Product/>}/>
         <Route path='/cart' element={<Cart/>}/>
@@ -38,7 +35,6 @@ const App = () => {
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/verify' element={<Verify/>}/>
         <Route path='/changeEmail' element={<ChangeEmail/>}/>
-        <Route path='/howtobuy' element={<HowToBuy/>}/>
         <Route path='/howtologin' element={<HowToLogin/>}/>
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />

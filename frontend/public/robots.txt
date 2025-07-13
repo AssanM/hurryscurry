@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hurry-scurry.com/sitemap.xml

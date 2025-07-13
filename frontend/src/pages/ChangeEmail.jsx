@@ -1,46 +1,66 @@
-import React from 'react'
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const ChangeEmail = () => {
   return (
-    <div>
-      <div className="text-gray-300 w-full">
-        <h1 className="text-4xl text-gray-300 mb-5 ml-25">Как сменить почту на аккаунте геншин импакт</h1>
-        <p className="ml-25 text-2xl">Инструкция по смене почты</p>
-        <div className="mt-5 text-2xl">
-            <ul className="ml-25s">
-                <li className="ml-25">
-                    <div className="ml-25">1. Переходим по ссылке на сайт игры <a href="https://account.hoyoverse.com" rel="noreferrer" target="_blank">https://account.hoyoverse.com</a></div>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">2. Вводим данные, которые выдались после покупки Логин:Пароль</div>
-                    <p><img className='mt-15'  alt="Вводим логин и пароль" src="https://i.imgur.com/RvYdGmF.png"/></p>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">3. Переходи в раздел "Настройки безопасности учётной записи" и нажимаем привязать Электронную почту</div>
-                    <p><img className='mt-15'  alt="раздел Настройки безопасности учётной записи" src="https://i.imgur.com/nF6071v.png"/></p>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">4. Если уже привязана Электронная почта, то нажимаем "Сменить привязку"</div>
-                    <p><img className='mt-15'  alt="Сменить привязку" src="https://i.imgur.com/28t3NlZ.png"/></p>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">4. Откроется окно где нужно будет отправить код на почту, нажимаем "Отправить"</div>
-                    <p><img className='mt-15'  alt="Отправить код" src="https://i.imgur.com/AE5OMaS.png"/></p>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">5. Заходим на сайт <a href="https://mail.rambler.ru/" target="_blank">mail.rambler.ru</a> используя те же данные что и от игры и копируем полученный КОД.</div>
-                    <p><img className='mt-15'  alt="Заходим в почту" src="https://i.imgur.com/USMK5Zn.png"/></p>
-                </li>
-                <li className="ml-25">
-                    <div className="ml-25">6. Далее у вас откроется окно, где нужно будет указать вашу Почту и подтвердить её! Готово!</div>
-                    <p><img className='mt-15'  alt="Привязка своей почты" src="https://i.imgur.com/XmpHmTN.png"/></p>
-                </li>
+    <div className="text-gray-300 w-full">
+      {/* 🔻 Мета-теги */}
+      <Helmet>
+        <title>Как сменить почту в Genshin Impact | Hurry-Scurry</title>
+        <meta name="description" content="Пошаговая инструкция по смене привязанной почты на аккаунте Genshin Impact через сайт HoYoverse." />
+        <meta name="robots" content="index, follow" />
 
-            </ul>
-        </div>
-    </div>
-    </div>
-  )
-}
+        <meta property="og:title" content="Как сменить почту в Genshin Impact" />
+        <meta property="og:description" content="Пошаговое руководство: как изменить привязку электронной почты на аккаунте Genshin. Безопасно и просто." />
+        <meta property="og:image" content="https://hurry-scurry.com/preview.jpg" />
+        <meta property="og:url" content="https://hurry-scurry.com/change-email" />
+        <meta property="og:type" content="article" />
 
-export default ChangeEmail
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Как сменить почту на аккаунте Genshin Impact" />
+        <meta name="twitter:description" content="Узнай, как легко изменить почту на своём аккаунте после покупки на Hurry-Scurry." />
+        <meta name="twitter:image" content="https://hurry-scurry.com/preview.jpg" />
+      </Helmet>
+
+      <h1 className="text-4xl text-gray-300 mb-5 ml-25">
+        Как сменить почту на аккаунте Genshin Impact
+      </h1>
+      <div className="mt-5 text-2xl ml-25 space-y-4">
+        <p><strong>1. Перейдите на официальный сайт HoYoverse:</strong></p>
+        <p>
+          <a
+            href="https://account.hoyoverse.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-400 underline"
+          >
+            https://account.hoyoverse.com/
+          </a>
+        </p>
+
+        <p><strong>2. Войдите в аккаунт, используя данные, выданные после покупки</strong></p>
+        <p>– Введите логин и пароль, полученные в заказе.</p>
+
+        <p><strong>3. Перейдите в раздел “Настройки безопасности учётной записи”</strong></p>
+        <p>– Нажмите на кнопку <strong>«Привязать электронную почту»</strong>.</p>
+
+        <p><strong>4. Если почта уже привязана — выберите опцию «Изменить привязку»</strong></p>
+        <p>– Нажмите <strong>«Сменить привязку»</strong>, чтобы привязать свою почту.</p>
+
+        <p><strong>5. Отправьте код подтверждения на текущую привязанную почту</strong></p>
+        <p>– Нажмите кнопку <strong>«Отправить код»</strong>.</p>
+
+        <p><strong>6. Зайдите в почтовый ящик</strong></p>
+        <p>– Перейдите на сайт почты по ссылке, полученной в заказе</p>
+        <p>– Введите указанную почту и пароль</p>
+        <p>– Скопируйте код из письма.</p>
+
+        <p><strong>7. Укажите свою новую почту и подтвердите её кодом</strong></p>
+        <p>– Введите адрес своей почты</p>
+        <p>– Подтвердите, и смена будет завершена ✅</p>
+      </div>
+    </div>
+  );
+};
+
+export default ChangeEmail;
