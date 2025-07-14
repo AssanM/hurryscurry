@@ -15,6 +15,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import Verify from './pages/Verify'
 import ChangeEmail from './pages/ChangeEmail'
 import HowToLogin from './pages/HowToLogin'
+import PaymentProcedure from './pages/PaymentProcedure'
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 
@@ -36,6 +37,7 @@ const App = () => {
         <Route path='/verify' element={<Verify/>}/>
         <Route path='/changeEmail' element={<ChangeEmail/>}/>
         <Route path='/howtologin' element={<HowToLogin/>}/>
+        <Route path='/paymentprocedure' element={<PaymentProcedure/>}/>
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
       </Routes>

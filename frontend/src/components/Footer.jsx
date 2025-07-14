@@ -2,6 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets'
 import {SocialIcon} from 'react-social-icons'
 import { Link, NavLink } from 'react-router-dom'
+import cards from '../assets/cards.png'
 const Footer = () => {
   return (
     <div>
@@ -9,6 +10,9 @@ const Footer = () => {
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 my-40 text-sm'>
         <div>
             <img src={assets.logo} className='mb-5 w-32' alt="" />
+            <div className='flex gap-2 mt-3'>
+  <img src={cards} alt="cards" className="w-32 h-auto" />
+</div>
             <p className='w-full md:w-2-3 text-gray-200'>
             {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. */}
             </p>
@@ -23,6 +27,7 @@ const Footer = () => {
                 <li>Как войти в аккаунт</li>
                 <li>Поддержка</li>*/}
           <NavLink to='/'>Главная</NavLink>
+          <NavLink to='/paymentprocedure'>Процедура Оплаты</NavLink>
           <NavLink to='/collection'>Коллекция</NavLink>
           <NavLink to='/howtobuy'>Как купить</NavLink>
           <NavLink to='/changeEmail'>Смена почты</NavLink>
