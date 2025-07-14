@@ -5,7 +5,7 @@ const PaymentProcedure = () => {
     <div className="text-gray-300 px-6 md:px-32 py-10 leading-relaxed text-lg max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Оплата банковскими картами</h1>
       <p className="mb-4">
-        Оплата банковскими картами осуществляется через. К оплате принимаются карты VISA и MasterCard.
+        Оплата банковскими картами осуществляется через платежный агрегатор. К оплате принимаются карты VISA и MasterCard.
       </p>
 
       <p className="mb-4">
